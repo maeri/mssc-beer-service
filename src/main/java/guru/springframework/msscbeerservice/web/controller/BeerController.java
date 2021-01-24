@@ -36,13 +36,13 @@ public class BeerController {
 	@PostMapping
 	public ResponseEntity<HttpHeaders> handleCreate(@RequestBody BeerDto beerDto) {
 		//TODO impl
-		return null;
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 	@PutMapping
 	public ResponseEntity<HttpHeaders> handleUpdate(@RequestBody BeerDto beerDto) {
 		//TODO impl
-		return null;
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 	@DeleteMapping({"/{beerId}"})
