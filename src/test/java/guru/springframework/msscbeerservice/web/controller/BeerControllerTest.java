@@ -59,7 +59,7 @@ class BeerControllerTest {
 
 		//when
 		ResultActions perform = mockMvc.perform(
-				put("/api/v1/beer/").contentType(MediaType.APPLICATION_JSON).content(beerDtoJson));
+				put("/api/v1/beer/" + UUID.randomUUID()).contentType(MediaType.APPLICATION_JSON).content(beerDtoJson));
 
 		//then
 		perform.andExpect(status().isNoContent());

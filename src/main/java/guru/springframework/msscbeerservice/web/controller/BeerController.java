@@ -1,6 +1,7 @@
 package guru.springframework.msscbeerservice.web.controller;
 
 import guru.springframework.msscbeerservice.web.model.BeerDto;
+import guru.springframework.msscbeerservice.web.model.BeerStyleEnum;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,25 +31,37 @@ public class BeerController {
 	@GetMapping({"/{beerId}"})
 	public ResponseEntity<BeerDto> getById(@PathVariable("beerId") UUID beerId) {
 		//TODO impl
-		return null;
+		return new ResponseEntity<>(
+				BeerDto.builder().beerName("ALE").beerStyle(BeerStyleEnum.ALE).build(), HttpStatus.OK);
 	}
 
 	@PostMapping
 	public ResponseEntity<HttpHeaders> handleCreate(@RequestBody BeerDto beerDto) {
 		//TODO impl
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		log.info("Request for save : {}", beerDto);
+		HttpHeaders headers = new HttpHeaders();
+
+		//TODO Add hostname (full URL)
+		headers.add("Location", "api/v1/beer/" + beerDto.getId().toString());
+		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 
-	@PutMapping
-	public ResponseEntity<HttpHeaders> handleUpdate(@RequestBody BeerDto beerDto) {
-		//TODO impl
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	@PutMapping({"/{beerId}"})
+	public ResponseEntity<HttpHeaders> handleUpdate(@PathVariable("beerId") UUID beerId,
+			@RequestBody BeerDto beerDto) {
+		log.info("Request for update : {} , {}", beerId, beerDto);
+		if (beerDto != null) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+
+		return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
 	}
 
 	@DeleteMapping({"/{beerId}"})
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void handleDelete(@PathVariable("beerId") UUID beerId) {
 		//TODO impl
+		log.info("Request for delete : {}", beerId);
 	}
 
 }
