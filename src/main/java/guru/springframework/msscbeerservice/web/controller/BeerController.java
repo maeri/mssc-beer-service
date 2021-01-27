@@ -3,12 +3,12 @@ package guru.springframework.msscbeerservice.web.controller;
 import guru.springframework.msscbeerservice.web.model.BeerDto;
 import guru.springframework.msscbeerservice.web.model.BeerStyleEnum;
 import java.util.UUID;
-import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,17 +33,18 @@ public class BeerController {
 	public ResponseEntity<BeerDto> getById(@PathVariable("beerId") UUID beerId) {
 		//TODO impl
 		return new ResponseEntity<>(
-				BeerDto.builder().beerName("ALE").beerStyle(BeerStyleEnum.ALE.toString()).build(), HttpStatus.OK);
+				BeerDto.builder().beerName("ALE").beerStyle(BeerStyleEnum.ALE.toString()).build(),
+				HttpStatus.OK);
 	}
 
 	@PostMapping
-	public ResponseEntity<HttpHeaders> handleCreate(@RequestBody @Valid BeerDto beerDto) {
+	public ResponseEntity<HttpHeaders> handleCreate(@RequestBody @Validated BeerDto beerDto) {
 		//TODO impl
 		log.info("Request for save : {}", beerDto);
 		HttpHeaders headers = new HttpHeaders();
 
 		//TODO Add hostname (full URL)
-		headers.add("Location", "api/v1/beer/" + beerDto.getId().toString());
+		headers.add("Location", "api/v1/beer/" + UUID.randomUUID().toString());
 		return new ResponseEntity<>(headers, HttpStatus.CREATED);
 	}
 
