@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class MvcExceptionHandler {
 
 	@ExceptionHandler({ConstraintViolationException.class})
-	public ResponseEntity<List> validationErrorHandler(ConstraintViolationException e) {
+	public ResponseEntity<List<String>> validationErrorHandler(ConstraintViolationException e) {
 
 		List<String> errorsList = new ArrayList<>(e.getConstraintViolations().size());
 		e.getConstraintViolations().stream().map(Object::toString).forEach(errorsList::add);
