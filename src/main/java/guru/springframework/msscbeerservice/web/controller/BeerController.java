@@ -3,6 +3,7 @@ package guru.springframework.msscbeerservice.web.controller;
 import guru.springframework.msscbeerservice.web.model.BeerDto;
 import guru.springframework.msscbeerservice.web.model.BeerStyleEnum;
 import java.util.UUID;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -32,11 +33,11 @@ public class BeerController {
 	public ResponseEntity<BeerDto> getById(@PathVariable("beerId") UUID beerId) {
 		//TODO impl
 		return new ResponseEntity<>(
-				BeerDto.builder().beerName("ALE").beerStyle(BeerStyleEnum.ALE).build(), HttpStatus.OK);
+				BeerDto.builder().beerName("ALE").beerStyle(BeerStyleEnum.ALE.toString()).build(), HttpStatus.OK);
 	}
 
 	@PostMapping
-	public ResponseEntity<HttpHeaders> handleCreate(@RequestBody BeerDto beerDto) {
+	public ResponseEntity<HttpHeaders> handleCreate(@RequestBody @Valid BeerDto beerDto) {
 		//TODO impl
 		log.info("Request for save : {}", beerDto);
 		HttpHeaders headers = new HttpHeaders();

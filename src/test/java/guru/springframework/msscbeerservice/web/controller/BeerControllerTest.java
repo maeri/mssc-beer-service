@@ -40,7 +40,7 @@ class BeerControllerTest {
 	@Test
 	void handleCreate() throws Exception {
 		//given
-		BeerDto beerDto = BeerDto.builder().build();
+		BeerDto beerDto = BeerDto.builder().id(UUID.randomUUID()).beerName("name").build();
 		String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
 		//when
