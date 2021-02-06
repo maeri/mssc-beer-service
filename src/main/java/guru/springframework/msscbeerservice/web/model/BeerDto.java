@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 /**
  * @author zawadma
@@ -22,16 +23,16 @@ import lombok.NoArgsConstructor;
 @Builder
 public class BeerDto {
 
-	@Null
+	@NotNull
 	private UUID id;
 
-	@Null
+	@NotNull
 	private Integer version;
 
-	@Null
+	@NotNull
 	private OffsetDateTime createdDate;
 
-	@Null
+	@NotNull
 	private OffsetDateTime lastModifiedDate;
 
 	@NotBlank

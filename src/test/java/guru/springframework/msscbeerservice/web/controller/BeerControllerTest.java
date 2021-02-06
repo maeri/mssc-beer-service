@@ -8,6 +8,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import guru.springframework.msscbeerservice.web.model.BeerDto;
+import guru.springframework.msscbeerservice.web.model.BeerStyleEnum;
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +43,18 @@ class BeerControllerTest {
 	@Test
 	void handleCreate() throws Exception {
 		//given
-		BeerDto beerDto = BeerDto.builder().id(UUID.randomUUID()).beerName("name").build();
+		BeerDto beerDto = BeerDto.builder()
+				.id(UUID.randomUUID())
+				.version(123123)
+				.createdDate(OffsetDateTime.now())
+				.lastModifiedDate(OffsetDateTime.now())
+				.beerName("ALE")
+				.beerStyle(BeerStyleEnum.ALE)
+				.upc(111011L)
+				.price(new BigDecimal("10.12"))
+				.quantityOnHand(110)
+				.build();
+
 		String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
 		//when
@@ -59,7 +73,8 @@ class BeerControllerTest {
 
 		//when
 		ResultActions perform = mockMvc.perform(
-				put("/api/v1/beer/" + UUID.randomUUID()).contentType(MediaType.APPLICATION_JSON).content(beerDtoJson));
+				put("/api/v1/beer/" + UUID.randomUUID()).contentType(MediaType.APPLICATION_JSON)
+						.content(beerDtoJson));
 
 		//then
 		perform.andExpect(status().isNoContent());
@@ -73,7 +88,7 @@ class BeerControllerTest {
 
 		//when
 		ResultActions perform = mockMvc.perform(
-				delete("/api/v1/beer/"+ UUID.randomUUID().toString()).accept(MediaType.APPLICATION_JSON));
+				delete("/api/v1/beer/" + UUID.randomUUID().toString()).accept(MediaType.APPLICATION_JSON));
 
 		//then
 		perform.andExpect(status().isNoContent());
