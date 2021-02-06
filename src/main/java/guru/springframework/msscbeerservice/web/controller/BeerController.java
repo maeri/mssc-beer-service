@@ -33,7 +33,7 @@ public class BeerController {
 	public ResponseEntity<BeerDto> getById(@PathVariable("beerId") UUID beerId) {
 		//TODO impl
 		return new ResponseEntity<>(
-				BeerDto.builder().beerName("ALE").beerStyle(BeerStyleEnum.ALE.toString()).build(),
+				BeerDto.builder().beerName("ALE").beerStyle(BeerStyleEnum.ALE).build(),
 				HttpStatus.OK);
 	}
 

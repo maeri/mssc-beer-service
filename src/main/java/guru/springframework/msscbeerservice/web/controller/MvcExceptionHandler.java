@@ -18,7 +18,6 @@ public class MvcExceptionHandler {
 
 		List<String> errorsList = new ArrayList<>(e.getConstraintViolations().size());
 		e.getConstraintViolations().stream().map(Object::toString).forEach(errorsList::add);
-
 		return new ResponseEntity<>(errorsList, HttpStatus.BAD_REQUEST);
 	}
 
