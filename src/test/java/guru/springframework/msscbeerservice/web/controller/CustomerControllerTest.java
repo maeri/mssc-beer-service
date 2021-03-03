@@ -56,11 +56,11 @@ class CustomerControllerTest {
 	void handleCreate() throws Exception {
 		//given
 		CustomerDto customerDto = CustomerDto.builder().id(UUID.randomUUID()).build();
-		String CustomerDtoJson = objectMapper.writeValueAsString(customerDto);
+		String customerDtoJson = objectMapper.writeValueAsString(customerDto);
 
 		//when
 		ResultActions perform = mockMvc.perform(
-				post("/api/v1/customer/").contentType(MediaType.APPLICATION_JSON).content(CustomerDtoJson));
+				post("/api/v1/customer/").contentType(MediaType.APPLICATION_JSON).content(customerDtoJson));
 
 		//then
 		perform.andExpect(status().isCreated());
@@ -70,12 +70,12 @@ class CustomerControllerTest {
 	void handleUpdate() throws Exception {
 		//given
 		CustomerDto customerDto = CustomerDto.builder().build();
-		String CustomerDtoJson = objectMapper.writeValueAsString(customerDto);
+		String customerDtoJson = objectMapper.writeValueAsString(customerDto);
 
 		//when
 		ResultActions perform = mockMvc.perform(
 				put("/api/v1/customer/" + UUID.randomUUID()).contentType(MediaType.APPLICATION_JSON)
-						.content(CustomerDtoJson));
+						.content(customerDtoJson));
 
 		//then
 		perform.andExpect(status().isNoContent());
@@ -85,7 +85,7 @@ class CustomerControllerTest {
 	void handleDelete() throws Exception {
 		//given
 		CustomerDto customerDto = CustomerDto.builder().build();
-		String CustomerDtoJson = objectMapper.writeValueAsString(customerDto);
+		String customerDtoJson = objectMapper.writeValueAsString(customerDto);
 
 		//when
 		ResultActions perform = mockMvc.perform(

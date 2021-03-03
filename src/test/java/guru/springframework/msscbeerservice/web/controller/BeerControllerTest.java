@@ -126,20 +126,7 @@ class BeerControllerTest {
 						)));
 	}
 
-	private static class ConstrainedFields {
 
-		private final ConstraintDescriptions constraintDescriptions;
-
-		ConstrainedFields(Class<?> input) {
-			this.constraintDescriptions = new ConstraintDescriptions(input);
-		}
-
-		private FieldDescriptor withPath(String path) {
-			return fieldWithPath(path).attributes(key("constraints").value(StringUtils
-					.collectionToDelimitedString(this.constraintDescriptions
-							.descriptionsForProperty(path), ". ")));
-		}
-	}
 
 	@Test
 	void handleUpdate() throws Exception {
